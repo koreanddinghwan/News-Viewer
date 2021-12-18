@@ -1,5 +1,6 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
+import { NavLink } from 'react-router-dom';
 
 const categories = [
   {
@@ -44,7 +45,7 @@ const CategoriesBlock = styled.div`
   }
 `;
 
-const Category = styled.div`
+const Category = styled(NavLink)`
   font-size: 1.5rem;
   cursor: pointer;
   white-space: pre;
@@ -57,23 +58,21 @@ const Category = styled.div`
   }
 
   /* props에 따라 css변경 */
-  ${(props) =>
-    props.active &&
-    css`
-      font-weight: 800;
-      border-bottom: 2px solid #22b8cf;
-      color: #22b8cf;
-      &:hover {
-        colobr: #3bc9db;
-      }
-    `}
+  &.active {
+    font-weight: 600;
+    border-bottom: 2px solid #22b8cf;
+    color: #22b8cf;
+    &:hover {
+      color: #3bc9db;
+    }
+  }
 
   & + & {
     margin-left: 1rem;
   }
 `;
 
-const Categories = ({ onSelect, category }) => {
+const Categories = () => {
   //category선택상태와 이를 바꿀 함수받아오기
   return (
     <CategoriesBlock>
@@ -81,8 +80,9 @@ const Categories = ({ onSelect, category }) => {
         <Category
           key={c.name}
           //같으면true, 다르면 false인 Category 컴포넌트생성
-          active={category === c.name}
-          onClick={() => onSelect(c.name)}
+          activeClassName="active"
+          exact={c.name === 'all'}
+          to={c.name === 'all' ? `/` : `/${c.name}`}
         >
           {c.text}
         </Category>

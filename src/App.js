@@ -1,14 +1,11 @@
-import React, { useCallback, useState } from 'react';
-import Categories from './components/Categorys';
-import NewsList from './components/NewsList';
-
+import React from 'react';
+import NewsPage from './pages/NewsPage';
+import { Route } from 'react-router-dom';
 function App() {
-  const [category, setCategory] = useState('all'); //이 state category 이름에따라 선택됨을 보여야함
-  const onSelect = useCallback((category) => setCategory(category), []);
   return (
     <div>
-      <Categories category={category} onSelect={onSelect}></Categories>
-      <NewsList category={category}></NewsList>
+      {/* match객체가 NewsPage컴포넌트로 전달 */}
+      <Route path="/:category?" component={NewsPage}></Route>
     </div>
   );
 }
