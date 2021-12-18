@@ -2,7 +2,7 @@ import React, { useCallback, useState } from 'react';
 import Categories from './components/Categorys';
 import NewsList from './components/NewsList';
 
-function App() {
+function NewsPage({ match }) {
   const [category, setCategory] = useState('all'); //이 state category 이름에따라 선택됨을 보여야함
   const onSelect = useCallback((category) => setCategory(category), []);
   return (
@@ -13,4 +13,4 @@ function App() {
   );
 }
 
-export default App;
+export default NewsPage;
